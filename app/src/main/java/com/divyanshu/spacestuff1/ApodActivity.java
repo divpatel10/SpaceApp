@@ -61,6 +61,7 @@ public class ApodActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             //Returns the query searched for JSON
             return NetworkUtils.getNasaApod();
+
         }
 
         @Override

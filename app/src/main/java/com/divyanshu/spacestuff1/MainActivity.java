@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ApodActivity.class);
                         startActivity(intent);
                 }
+                else if(positon==1){
+                    Intent intent = new Intent(getApplicationContext(), MarsRoversActivity.class);
+                        startActivity(intent);
+                }
             }
         });
 
