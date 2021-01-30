@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,7 +41,6 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        new getISSLoation().execute();
 
         FloatingActionButton fab = findViewById(R.id.updateISS);
 
@@ -57,11 +57,7 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("International Space Station"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        new getISSLoation().execute();
     }
 
 
@@ -90,12 +86,15 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
 
                 latitude = jsonObject.getDouble("latitude");
                 longitude = jsonObject.getDouble("longitude");
+
                 if (longitude != 0 && longitude != 0) {
+
                     LatLng spaceStation = new LatLng(latitude,latitude);
                     mMap.clear();
-                    mMap.addMarker(new MarkerOptions().position(spaceStation).title("International Space Station"));
+                    mMap.addMarker(new MarkerOptions().position(spaceStation).title("International Space Station").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_iss)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(spaceStation));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(spaceStation,2f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(spaceStation,5f));
+
                 }
                 else {
                 }
