@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class MarsRoversActivity extends AppCompatActivity {
     private List<String> imageURL;
-    private RecyclerView mRecyclerView;
+    private ListView mListView;
     private MarsRoversAdapter marsRoversAdapter;
     private ArrayList<RoverModel> modelArrayList;
 
@@ -32,15 +33,11 @@ public class MarsRoversActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mars_rovers);
         imageURL = null;
-        mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
+        mListView = findViewById(R.id.recycler_view);
         modelArrayList = new ArrayList<>();
-        marsRoversAdapter = new MarsRoversAdapter(MarsRoversActivity.this,modelArrayList);
 
-        modelArrayList.add(new RoverModel("http://mars.nasa.gov/mer/gallery/all/1/n/1000/1N216958451EFF76ZFP1950L0M1-BR.JPG"));
 
-        mRecyclerView.setAdapter(marsRoversAdapter);
-        new FetchRoverInfo();
+        new FetchRoverInfo().execute();
 
     }
 
@@ -49,11 +46,13 @@ public class MarsRoversActivity extends AppCompatActivity {
 
 
         void FetchRoverInfo() {
+
         }
 
         @Override
         protected String doInBackground(String... strings) {
             //Returns the query searched for JSON
+
             return NetworkUtils.getMarsRoverImages();
 
         }
@@ -77,13 +76,7 @@ public class MarsRoversActivity extends AppCompatActivity {
                     modelArrayList.add(new RoverModel(imgstring));
                 }
 
-
-                marsRoversAdapter = new MarsRoversAdapter(MarsRoversActivity.this,modelArrayList);
-
-                if (imageURL.isEmpty()) {
-                    Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
-
-                }
+                mListView.setAdapter(new MarsRoversAdapter(MarsRoversActivity.this, modelArrayList));
 
 
             } catch (JSONException e) {

@@ -148,6 +148,63 @@ public class NetworkUtils {
 
     }
 
+    static String getISSLocation(){
+        HttpURLConnection urlConnection = null;
+        BufferedReader reader = null;
+        String ISSLocation = null;
+
+        try {
+            //...
+            Uri builtURI = Uri.parse("https://api.wheretheiss.at/v1/satellites/25544").buildUpon().build();
+
+
+            URL requestURL = new URL(builtURI.toString());
+
+            urlConnection = (HttpURLConnection) requestURL.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // Get the InputStream.
+            InputStream inputStream = urlConnection.getInputStream();
+
+            // Create a buffered reader from that input stream.
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            // Use a StringBuilder to hold the incoming response.
+            StringBuilder builder = new StringBuilder();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+
+                builder.append("\n");
+            }
+
+            if (builder.length() == 0) {
+                // dont parse if the stream is empty
+                return null;
+            }
+            ISSLocation = builder.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return ISSLocation;
+
+    }
+
 
 
 

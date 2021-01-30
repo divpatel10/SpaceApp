@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -86,7 +87,7 @@ public class ApodActivity extends AppCompatActivity {
 
                 }
                 else {
-                    mTitleText.get().setText("SOmething went wrong mate");
+                    mTitleText.get().setText("Something went wrong mate");
                     mAuthorText.get().setText("");
                 }
 
