@@ -89,7 +89,7 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
 
                 if (longitude != 0 && longitude != 0) {
 
-                    LatLng spaceStation = new LatLng(latitude,latitude);
+                    LatLng spaceStation = new LatLng(latitude,longitude);
                     mMap.clear();
                     mMap.addMarker(new MarkerOptions().position(spaceStation).title("International Space Station").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_iss)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(spaceStation));

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.squareup.picasso.Picasso;
@@ -71,7 +72,10 @@ public class ApodActivity extends AppCompatActivity {
 
             String picTopic;
             String picExplanation;
-
+            if(s==null){
+                Toast.makeText(getApplicationContext(),"Oops, something went wrong! Try again!",Toast.LENGTH_SHORT);
+                return;
+            }
             try {
                 //...
 

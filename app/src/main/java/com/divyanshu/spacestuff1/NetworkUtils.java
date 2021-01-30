@@ -142,7 +142,6 @@ public class NetworkUtils {
             }
         }
 
-        Log.d("BRUH", MarsRoverString);
 
         return MarsRoverString;
 

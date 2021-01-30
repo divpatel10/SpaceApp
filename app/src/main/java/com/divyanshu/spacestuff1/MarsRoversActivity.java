@@ -45,7 +45,7 @@ public class MarsRoversActivity extends AppCompatActivity {
     public class FetchRoverInfo extends AsyncTask<String, Void, String> {
 
 
-        void FetchRoverInfo() {
+        FetchRoverInfo() {
 
         }
 
@@ -62,6 +62,11 @@ public class MarsRoversActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
                 String imgstring;
+
+                if(s==null){
+                    Toast.makeText(getApplicationContext(),"Oops, something went wrong! Try again!",Toast.LENGTH_SHORT);
+                    return;
+                }
 
             try {
                 //...
