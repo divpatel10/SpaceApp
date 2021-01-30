@@ -66,10 +66,8 @@ public class MarsRoversActivity extends AppCompatActivity {
             try {
                 //...
                 JSONObject jsonObject = new JSONObject(s);
-                Log.d("BRUH",jsonObject.toString());
 
                 JSONArray itemsArray = jsonObject.getJSONArray("photos");
-                Log.d("BRUH",itemsArray.toString());
                 for(int i=0; i<itemsArray.length();i++){
                     JSONObject indexJSON = itemsArray.getJSONObject(i);
                     imgstring = indexJSON.getString("img_src");
