@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MainPageAdapter extends ArrayAdapter<String> {
     ArrayList<String> topics;
     ArrayList<Integer> descriptions;
-    int[] backgroundRes = {R.drawable.forest_stars,R.drawable.planet_storm,R.drawable.astronaut};
+    int[] backgroundRes = {R.drawable.forest_stars,R.drawable.rover_image,R.drawable.astronaut};
     int num_of_images = backgroundRes.length;
 
     TextView tv;

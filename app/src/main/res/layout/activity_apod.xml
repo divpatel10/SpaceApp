@@ -5,16 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background= "#1c3485"
+    android:background= "@drawable/main_background"
     tools:context=".ApodActivity">
 
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="searchApoc"
-        android:text="@string/button_text"
-        android:layout_gravity="center"/>
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        >
+        <Button
+            android:id="@+id/dateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:onClick="searchDate"
+            android:text="@string/enter_date" />
+      <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+          android:layout_weight="2"
+          android:onClick="searchApoc"
+        android:text="@string/random" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/titleText"
@@ -23,6 +40,7 @@
         android:layout_marginTop="24dp"
         android:textSize="30sp"
         android:text="@string/NASA_photo_of_the_day"
+        android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:layout_gravity="center"/>
 
@@ -44,12 +62,15 @@
                 android:layout_height="match_parent"/>
 
             <TextView
+                android:paddingTop="12dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:id="@+id/authorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ebedf2"
-                android:text="@string/caption"
                 android:layout_gravity="center"
+                android:textSize="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
         </LinearLayout>
 

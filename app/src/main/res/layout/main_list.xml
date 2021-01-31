@@ -4,8 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/curved_boundaries"
     android:layout_height="wrap_content"
+    android:padding="16dp"
     android:orientation="vertical">
 
     <ImageView
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
+
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -32,15 +34,17 @@
           android:layout_height="wrap_content"
           android:textColor="@color/white"
           android:textStyle="bold"
+          android:layout_marginTop="6dp"
           android:textSize="22sp"
           android:layout_weight="8" />
 
       <TextView
           android:id="@+id/main_list_description"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
           android:layout_weight="4"
           android:padding="2dp"
+          android:layout_marginLeft="4dp"
           android:textColor="@color/white"
           android:textSize="18sp" />
 

@@ -2,7 +2,6 @@ package com.divyanshu.spacestuff1;
 
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 public class NetworkUtils {
     private static final String LOG_TAG =  NetworkUtils.class.getSimpleName();
@@ -21,19 +19,31 @@ public class NetworkUtils {
     private static final String key = "KpPKYvbEQzkIwY4QwQBnMpU1Srnwp8Uel2gl976B";
     private static final String ROVER_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
     private static final String SOL_DAYS = "sol";
-    private static final String[] ROVER_NAMES = {"Opportunity/photos?","Curiosity/photos?","Sprint/photos?"};
+    private static final String PHOTOS = "/photos?";
 
-    static String getNasaApod(){
+    static String getNasaApod(String apod_date){
+
+
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String APODimageString = null;
 
         try {
-            //...
-            Uri builtURI = Uri.parse(BASE_URL).buildUpon()
-                    .appendQueryParameter(API_KEY, key)
-                    .appendQueryParameter(RANDOM_ONE,"1")
-                    .build();
+            Uri builtURI;
+            if(apod_date == null) {
+
+
+                builtURI  = Uri.parse(BASE_URL).buildUpon()
+                        .appendQueryParameter(API_KEY, key)
+                        .appendQueryParameter(RANDOM_ONE, "1")
+                        .build();
+            }
+            else{
+                 builtURI = Uri.parse(BASE_URL).buildUpon()
+                        .appendQueryParameter(API_KEY, key)
+                        .appendQueryParameter("date", apod_date)
+                        .build();
+            }
 
             URL requestURL = new URL(builtURI.toString());
 
@@ -77,23 +87,27 @@ public class NetworkUtils {
                 }
             }
         }
-
-        //        Log.d(LOG_TAG, bookJSONString);
-
         return APODimageString;
-
     }
 
 
-    static String getMarsRoverImages(){
+    static String getMarsRoverImages(String solDays, String rover){
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String MarsRoverString = null;
 
+            if(rover.equals("na")){
+                rover = "Curiosity";
+            }
+            if(solDays.equals("na")){
+                solDays = "50";
+
+            }
         try {
-            //...
-            Uri builtURI = Uri.parse(ROVER_URL+ROVER_NAMES[0]).buildUpon()
-                    .appendQueryParameter(SOL_DAYS,"100")
+            Uri builtURI;
+
+                    builtURI = Uri.parse(ROVER_URL+rover+PHOTOS).buildUpon()
+                    .appendQueryParameter(SOL_DAYS,solDays)
                     .appendQueryParameter(API_KEY, key)
                     .build();
 

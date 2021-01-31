@@ -93,7 +93,7 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
                     mMap.clear();
                     mMap.addMarker(new MarkerOptions().position(spaceStation).title("International Space Station").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_iss)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(spaceStation));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(spaceStation,5f));
+                   // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(spaceStation,5f));
 
                 }
                 else {
