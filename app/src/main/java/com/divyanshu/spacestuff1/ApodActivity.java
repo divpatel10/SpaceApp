@@ -2,6 +2,7 @@ package com.divyanshu.spacestuff1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,14 @@ public class ApodActivity extends AppCompatActivity {
         mAuthorText = (TextView)findViewById(R.id.authorText);
         mImageView = findViewById(R.id.imageView);
 
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ApodActivity.this, FullScreenImage.class);
+                intent.putExtra("image", imageURL);
+                startActivity(intent);
+            }
+        });
     }
 
     public void searchApoc(View view) {

@@ -18,6 +18,7 @@ public class NetworkUtils {
     private static final String BASE_URL = "https://api.nasa.gov/planetary/apod?";
     private static final String API_KEY = "api_key";
     private static final String RANDOM_ONE = "count";
+    private static final String key = "KpPKYvbEQzkIwY4QwQBnMpU1Srnwp8Uel2gl976B";
     private static final String ROVER_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
     private static final String SOL_DAYS = "sol";
     private static final String[] ROVER_NAMES = {"Opportunity/photos?","Curiosity/photos?","Sprint/photos?"};
@@ -30,7 +31,7 @@ public class NetworkUtils {
         try {
             //...
             Uri builtURI = Uri.parse(BASE_URL).buildUpon()
-                    .appendQueryParameter(API_KEY, "DEMO_KEY")
+                    .appendQueryParameter(API_KEY, key)
                     .appendQueryParameter(RANDOM_ONE,"1")
                     .build();
 
@@ -93,7 +94,7 @@ public class NetworkUtils {
             //...
             Uri builtURI = Uri.parse(ROVER_URL+ROVER_NAMES[0]).buildUpon()
                     .appendQueryParameter(SOL_DAYS,"100")
-                    .appendQueryParameter(API_KEY, "DEMO_KEY")
+                    .appendQueryParameter(API_KEY, key)
                     .build();
 
 

@@ -19,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         ListView listView = findViewById(R.id.mainList);
 
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList,titles);
-        ArrayAdapter arrayAdapter =  new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter arrayAdapter = new MainPageAdapter(MainActivity.this,arrayList);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

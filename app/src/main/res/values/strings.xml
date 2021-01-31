@@ -6,4 +6,8 @@
     <string name="loading">Loading...</string>
     <string name="button_text">Search</string>
     <string name="title_activity_i_s_s_tracker">Map</string>
+    <string name="apod_description">Explore NASA\'s Astronomy Picture of the day</string>
+    <string name="rover_description">Browse through all the photos taken by the Spirit, Opportunity ,and Curiosity rover.</string>
+    <string name="iss_description">Locate the location of the International Space Station with our Live ISS Tracker.</string>
+
 </resources>

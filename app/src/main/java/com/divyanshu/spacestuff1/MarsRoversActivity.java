@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MarsRoversActivity extends AppCompatActivity {
-    private List<String> imageURL;
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
     private MarsRoversAdapter marsRoversAdapter;
     private ArrayList<RoverModel> modelArrayList;
 
@@ -32,12 +30,15 @@ public class MarsRoversActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mars_rovers);
-        imageURL = null;
-        mListView = findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setHasFixedSize(true);
         modelArrayList = new ArrayList<>();
-
-
+        marsRoversAdapter = new MarsRoversAdapter(MarsRoversActivity.this,modelArrayList);
+        mRecyclerView.setAdapter(marsRoversAdapter);
         new FetchRoverInfo().execute();
+
 
     }
 
@@ -45,14 +46,12 @@ public class MarsRoversActivity extends AppCompatActivity {
     public class FetchRoverInfo extends AsyncTask<String, Void, String> {
 
 
-        FetchRoverInfo() {
-
+         FetchRoverInfo() {
         }
 
         @Override
         protected String doInBackground(String... strings) {
             //Returns the query searched for JSON
-
             return NetworkUtils.getMarsRoverImages();
 
         }
@@ -61,12 +60,7 @@ public class MarsRoversActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-                String imgstring;
-
-                if(s==null){
-                    Toast.makeText(getApplicationContext(),"Oops, something went wrong! Try again!",Toast.LENGTH_SHORT);
-                    return;
-                }
+                String imgstring="";
 
             try {
                 //...
@@ -76,10 +70,19 @@ public class MarsRoversActivity extends AppCompatActivity {
                 for(int i=0; i<itemsArray.length();i++){
                     JSONObject indexJSON = itemsArray.getJSONObject(i);
                     imgstring = indexJSON.getString("img_src");
+                    Log.d("BRUH",imgstring);
+
                     modelArrayList.add(new RoverModel(imgstring));
                 }
 
-                mListView.setAdapter(new MarsRoversAdapter(MarsRoversActivity.this, modelArrayList));
+
+                marsRoversAdapter = new MarsRoversAdapter(MarsRoversActivity.this,modelArrayList);
+                mRecyclerView.setAdapter(marsRoversAdapter);
+
+                if (imgstring.equals("")) {
+                    Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
+
+                }
 
 
             } catch (JSONException e) {
