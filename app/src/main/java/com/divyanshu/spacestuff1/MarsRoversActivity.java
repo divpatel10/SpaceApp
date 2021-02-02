@@ -119,6 +119,9 @@ public class MarsRoversActivity extends AppCompatActivity {
 
     }
 
+    public void downloadRoverImage(View view) {
+    }
+
 
     public class FetchRoverInfo extends AsyncTask<String, Void, String> {
 

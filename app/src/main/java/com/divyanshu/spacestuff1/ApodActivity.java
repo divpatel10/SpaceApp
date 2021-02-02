@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -13,11 +17,15 @@ import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,8 +48,8 @@ public class ApodActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
-        mTitleText = (TextView)findViewById(R.id.titleText);
-        mAuthorText = (TextView)findViewById(R.id.authorText);
+        mTitleText = (TextView) findViewById(R.id.titleText);
+        mAuthorText = (TextView) findViewById(R.id.authorText);
         mImageView = findViewById(R.id.imageView);
         calendar1 = Calendar.getInstance();
 
@@ -59,21 +67,63 @@ public class ApodActivity extends AppCompatActivity {
         isDateSearch = false;
         mAuthorText.setText("");
         mTitleText.setText(R.string.loading);
-        apod_date=null;
-        new FetchNasaInfo(mTitleText, mAuthorText,mImageView).execute();
+        apod_date = null;
+        new FetchNasaInfo(mTitleText, mAuthorText, mImageView).execute();
 
     }
 
     public void searchDate(View view) {
-            isDateSearch = true;
+        isDateSearch = true;
         mAuthorText.setText("");
         mTitleText.setText(R.string.loading);
 
         new DatePickerDialog(ApodActivity.this, mDateSetListener, calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), calendar1.get(Calendar.DAY_OF_MONTH)).show();
 
 
+    }
+
+    public void downloadImage(View view) {
+
+        Picasso.get().load(imageURL).into(getTarget(imageURL));
+    }
+
+    private static Target getTarget( final String url){
+        Target target = new Target() {
+
+            @Override
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + url);
+                        try {
+                            file.createNewFile();
+                            FileOutputStream ostream = new FileOutputStream(file);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, ostream);
+                            ostream.flush();
+                            ostream.close();
+                        } catch (IOException e) {
+                            Log.e("IOException", e.getLocalizedMessage());
+                        }
+                    }
+                }).start();
+
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
 
 
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+        return target;
     }
 
 

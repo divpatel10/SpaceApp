@@ -13,25 +13,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="30dp"
         >
         <Button
             android:id="@+id/dateButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:onClick="searchDate"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
             android:text="@string/enter_date" />
       <Button
         android:id="@+id/searchButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-          android:layout_weight="2"
-          android:onClick="searchApoc"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:onClick="searchApoc"
         android:text="@string/random" />
+        <Button
+            android:id="@+id/download_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:onClick="downloadImage"
+            android:text="Download" />
 
     </LinearLayout>
 

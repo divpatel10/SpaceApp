@@ -19,17 +19,26 @@
             android:id="@+id/roverChooser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
             android:onClick="chooseRover"
             android:text="Choose Rover" />
         <Button
             android:id="@+id/solChooser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+
             android:onClick="chooseSol"
             android:text="Select SOL" />
+        <Button
+            android:id="@+id/imageDownloadMars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="downloadRoverImage"
+            android:text="DownloadImage" />
 
     </LinearLayout>
 
