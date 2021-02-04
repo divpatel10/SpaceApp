@@ -3,9 +3,12 @@ package com.divyanshu.spacestuff1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -83,48 +88,25 @@ public class ApodActivity extends AppCompatActivity {
     }
 
     public void downloadImage(View view) {
+        try {
 
-        Picasso.get().load(imageURL).into(getTarget(imageURL));
+        Uri uri = Uri.parse(imageURL);
+        DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+        String fileName = imageURL.substring(imageURL.lastIndexOf('/') + 1);
+        request.setTitle(fileName);
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"/images");
+        request.setMimeType("*/*");
+        downloadManager.enqueue(request);
+        } catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Error Downloading", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
-    private static Target getTarget( final String url){
-        Target target = new Target() {
-
-            @Override
-            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                new Thread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + url);
-                        try {
-                            file.createNewFile();
-                            FileOutputStream ostream = new FileOutputStream(file);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, ostream);
-                            ostream.flush();
-                            ostream.close();
-                        } catch (IOException e) {
-                            Log.e("IOException", e.getLocalizedMessage());
-                        }
-                    }
-                }).start();
-
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
-        return target;
-    }
 
 
     public class FetchNasaInfo extends AsyncTask<String, Void, String> {
