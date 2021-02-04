@@ -1,6 +1,5 @@
 package com.divyanshu.spacestuff1;
 
-import android.widget.ImageView;
 
 public class RoverModel {
     private String imageURL;
@@ -13,7 +12,4 @@ public class RoverModel {
         return imageURL;
     }
 
-    public void setImageView(String imageURL) {
-        this.imageURL = imageURL;
-    }
 }

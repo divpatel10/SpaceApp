@@ -18,16 +18,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.chrisbanes.photoview.PhotoView;
-import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MarsRoversActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -116,15 +111,10 @@ public class MarsRoversActivity extends AppCompatActivity {
 
         });
         alertBox.create().show();
-
-    }
-
-    public void downloadRoverImage(View view) {
     }
 
 
     public class FetchRoverInfo extends AsyncTask<String, Void, String> {
-
 
          FetchRoverInfo() {
         }
@@ -133,8 +123,7 @@ public class MarsRoversActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             //Returns the query searched for JSON
             return NetworkUtils.getMarsRoverImages(solSelected,roverSelected);
-
-        }
+         }
 
         @Override
         protected void onPostExecute(String s) {
