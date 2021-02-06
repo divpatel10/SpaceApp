@@ -41,7 +41,7 @@ public class MarsRoversAdapter extends RecyclerView.Adapter<MarsRoversAdapter.Ma
 
               //Higher android devices don't allow http connections!
                 imageURL.replace("http:/","https:/");
-                 Log.d("BROSEPH",imageURL);
+                 Log.d("Link",imageURL);
 
         Picasso.get().load(imageURL).fit().centerInside().placeholder(R.drawable.icon_update).into(holder.imageView);
 

@@ -2,6 +2,7 @@ package com.divyanshu.spacestuff1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -102,9 +103,9 @@ public class ApodActivity extends AppCompatActivity {
 
     public class FetchNasaInfo extends AsyncTask<String, Void, String> {
 
-        private WeakReference<TextView> mTitleText;
-        private WeakReference<TextView> mAuthorText;
-        private WeakReference<PhotoView> mImageView;
+        private final WeakReference<TextView> mTitleText;
+        private final WeakReference<TextView> mAuthorText;
+        private final WeakReference<PhotoView> mImageView;
 
 
         FetchNasaInfo(TextView titleText, TextView authorText, PhotoView imageView) {
@@ -156,7 +157,7 @@ public class ApodActivity extends AppCompatActivity {
 
                 }
                 else {
-                    mTitleText.get().setText("Something went wrong");
+                    mTitleText.get().setText(R.string.error_message);
                     mAuthorText.get().setText("");
                 }
 
@@ -172,15 +173,13 @@ public class ApodActivity extends AppCompatActivity {
 
     private final DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
+        @SuppressLint("SimpleDateFormat")
         public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-            int startYear = selectedYear;
-            int startMonth = selectedMonth;
-            int startDay = selectedDay;
 
             Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.DAY_OF_MONTH, startDay);
-            calendar.set(Calendar.MONTH, startMonth);
-            calendar.set(Calendar.YEAR, startYear);
+            calendar.set(Calendar.DAY_OF_MONTH, selectedDay);
+            calendar.set(Calendar.MONTH, selectedMonth);
+            calendar.set(Calendar.YEAR, selectedYear);
 
             calendar1.get(Calendar.DAY_OF_MONTH);
             calendar1.get(Calendar.MONTH);

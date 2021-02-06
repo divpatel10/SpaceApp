@@ -13,5 +13,6 @@
     <string name="spirit_rover">Spirit</string>
     <string name="opportunity_rover">Opportunity</string>
     <string name="curiosity_rover">Curiosity</string>
+    <string name="error_message">Error getting data.</string>
 
 </resources>

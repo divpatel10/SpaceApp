@@ -140,7 +140,6 @@ public class MarsRoversActivity extends AppCompatActivity {
                 for(int i=0; i<itemsArray.length();i++){
                     JSONObject indexJSON = itemsArray.getJSONObject(i);
                     imgstring = indexJSON.getString("img_src");
-                    Log.d("BRUH",imgstring);
 
                     modelArrayList.add(new RoverModel(imgstring));
                 }
@@ -150,14 +149,14 @@ public class MarsRoversActivity extends AppCompatActivity {
                 mRecyclerView.setAdapter(marsRoversAdapter);
 
                 if (imgstring.equals("")) {
-                    Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),R.string.error_message,Toast.LENGTH_LONG).show();
 
                 }
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Error Retrieving Data!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),R.string.error_message,Toast.LENGTH_LONG).show();
 
             }
 
