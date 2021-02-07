@@ -17,10 +17,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,13 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                new getISSLoation().execute();
+            }
+        },0,1000);
 
         FloatingActionButton fab = findViewById(R.id.updateISS);
 
