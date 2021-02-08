@@ -49,7 +49,7 @@ public class MarsRoversAdapter extends RecyclerView.Adapter<MarsRoversAdapter.Ma
                 imageURL.replace("http:/","https:/");
                  Log.d("Link",imageURL);
 
-        Picasso.get().load(imageURL).fit().centerInside().placeholder(R.drawable.icon_update).into(holder.imageView);
+        Picasso.get().load(imageURL).placeholder(R.drawable.icon_update).centerInside().fit().into(holder.imageView);
 
 
 
