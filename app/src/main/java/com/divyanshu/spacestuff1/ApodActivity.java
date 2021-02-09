@@ -33,7 +33,8 @@ public class ApodActivity extends AppCompatActivity {
     private TextView mTitleText;
     private TextView mAuthorText;
     private PhotoView mImageView;
-    private String imageURL;
+    private String imageURL_hd="";
+    private String imageURL ="";
     private boolean isDateSearch = false;
     private String apod_date = "";
     private static Calendar calendar1;
@@ -54,12 +55,14 @@ public class ApodActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ApodActivity.this, FullScreenImage.class);
-                intent.putExtra("image", imageURL);
+                intent.putExtra("image", imageURL_hd);
                 startActivity(intent);
             }
         });
     }
 
+    //Function that is called when button named "random" is pressed.
+    //This function calls the Async task FetchNasaInfo, and sets boolean value isDateSearch to false
     public void searchApoc(View view) {
         isDateSearch = false;
         mAuthorText.setText("");
@@ -74,19 +77,24 @@ public class ApodActivity extends AppCompatActivity {
         mAuthorText.setText("");
         mTitleText.setText(R.string.loading);
 
-        new DatePickerDialog(ApodActivity.this, mDateSetListener, calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), calendar1.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(ApodActivity.this,
+                mDateSetListener
+                , calendar1.get(Calendar.YEAR)
+                , calendar1.get(Calendar.MONTH)
+                , calendar1.get(Calendar.DAY_OF_MONTH)).show();
 
 
     }
 
+    //Function that downloads the image taking url from String variable imageURL_hd
     public void downloadImage(View view) {
         try {
 
-        Uri uri = Uri.parse(imageURL);
+        Uri uri = Uri.parse(imageURL_hd);
         DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-        String fileName = imageURL.substring(imageURL.lastIndexOf('/') + 1);
+        String fileName = imageURL_hd.substring(imageURL_hd.lastIndexOf('/') + 1);
         request.setTitle(fileName);
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -103,11 +111,12 @@ public class ApodActivity extends AppCompatActivity {
 
     public class FetchNasaInfo extends AsyncTask<String, Void, String> {
 
+        //Weak References used to prevent memory leaks
         private final WeakReference<TextView> mTitleText;
         private final WeakReference<TextView> mAuthorText;
         private final WeakReference<PhotoView> mImageView;
 
-
+        //Constructor to initialize weakpointers with their corresponding views
         FetchNasaInfo(TextView titleText, TextView authorText, PhotoView imageView) {
             this.mTitleText = new WeakReference<>(titleText);
             this.mAuthorText = new WeakReference<>(authorText);
@@ -135,19 +144,21 @@ public class ApodActivity extends AppCompatActivity {
             }
             try {
 
+                //if the image search query came with a date, parse json according to it
                 if(!isDateSearch){
                     JSONArray itemsArray = new JSONArray(s);
                     JSONObject indexJSON = itemsArray.getJSONObject(0);
                     picTopic = indexJSON.getString("title");
                     picExplanation = indexJSON.getString("explanation");
-                    imageURL = indexJSON.getString("hdurl");
-
+                    imageURL_hd = indexJSON.getString("hdurl");
+                    imageURL = indexJSON.getString("url");
                 }
                 else{
                         JSONObject indexJSON = new JSONObject(s);
                         picTopic = indexJSON.getString("title");
                         picExplanation = indexJSON.getString("explanation");
-                        imageURL = indexJSON.getString("hdurl");
+                        imageURL_hd = indexJSON.getString("hdurl");
+                        imageURL = indexJSON.getString("url");
 
                 }
 
@@ -167,7 +178,16 @@ public class ApodActivity extends AppCompatActivity {
                 Toast.makeText(ApodActivity.this,"Error retrieving information",Toast.LENGTH_SHORT).show();
             }
 
+        // If the standard image does not exist, load the HD image
+            if(imageURL == null || imageURL.equals("")) {
+                Picasso.get().load(imageURL_hd).into(mImageView.get());
+                Toast.makeText(ApodActivity.this,"Bruh",Toast.LENGTH_SHORT).show();
+
+            }
+            else{
+
             Picasso.get().load(imageURL).into(mImageView.get());
+            }
         }
     }
 

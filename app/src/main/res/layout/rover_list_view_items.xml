@@ -23,7 +23,7 @@
         android:paddingBottom="8dp"
         android:id="@+id/rover_image_download"
         android:clickable="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/icon_download"
+        android:background="@null"
         android:focusable="true" />
 </RelativeLayout>
