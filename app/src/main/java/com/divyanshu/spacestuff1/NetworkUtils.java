@@ -169,9 +169,7 @@ public class NetworkUtils {
         String ISSLocation = null;
 
         try {
-            //...
             Uri builtURI = Uri.parse("https://api.wheretheiss.at/v1/satellites/25544").buildUpon().build();
-
 
             URL requestURL = new URL(builtURI.toString());
 
@@ -215,9 +213,7 @@ public class NetworkUtils {
                 }
             }
         }
-
         return ISSLocation;
-
     }
 
 

@@ -80,7 +80,6 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
             double longitude;
 
             try {
-                //...
 
                 JSONObject jsonObject = new JSONObject(s);
 
@@ -91,7 +90,7 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
 
                     LatLng spaceStation = new LatLng(latitude,longitude);
                     mMap.clear();
-                    mMap.addMarker(new MarkerOptions().position(spaceStation).title("International Space Station").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_iss)));
+                    mMap.addMarker(new MarkerOptions().position(spaceStation).title("ISS").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_iss)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(spaceStation));
 
                 }
