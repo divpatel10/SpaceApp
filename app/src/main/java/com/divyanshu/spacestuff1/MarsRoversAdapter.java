@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,20 @@ public class MarsRoversAdapter extends RecyclerView.Adapter<MarsRoversAdapter.Ma
                 imageURL.replace("http:/","https:/");
                  Log.d("Link",imageURL);
 
-        Picasso.get().load(imageURL).placeholder(R.drawable.icon_update).centerInside().fit().into(holder.imageView);
+        Picasso.get().load(imageURL).centerInside().fit().into(holder.imageView, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                if(holder.progressBar != null){
+                    holder.progressBar.setVisibility(View.GONE);
+
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
 
 
 
@@ -95,10 +109,12 @@ public class MarsRoversAdapter extends RecyclerView.Adapter<MarsRoversAdapter.Ma
 
         public ImageView imageView;
         public ImageButton imageButton;
+        public ProgressBar progressBar;
         public MarsRoversViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.mars_rover_image);
             imageButton = itemView.findViewById(R.id.rover_image_download);
+            progressBar = itemView.findViewById(R.id.rover_image_progress_bar);
         }
 
 

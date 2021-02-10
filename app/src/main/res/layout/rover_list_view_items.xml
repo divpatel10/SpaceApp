@@ -26,4 +26,10 @@
         android:src="@drawable/icon_download"
         android:background="@null"
         android:focusable="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/rover_image_progress_bar"/>
 </RelativeLayout>
