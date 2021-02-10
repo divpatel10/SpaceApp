@@ -21,6 +21,7 @@ public class NetworkUtils {
     private static final String SOL_DAYS = "sol";
     private static final String PHOTOS = "/photos?";
 
+
     static String getNasaApod(String apod_date){
 
 
