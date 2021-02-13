@@ -14,5 +14,7 @@
     <string name="opportunity_rover">Opportunity</string>
     <string name="curiosity_rover">Curiosity</string>
     <string name="error_message">Error getting data.</string>
+    <string name="rover_button_text">Rover</string>
+    <string name="sol_button_text">SOL</string>
 
 </resources>

@@ -17,21 +17,21 @@
         >
         <Button
             android:id="@+id/roverChooser"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:onClick="chooseRover"
-            android:text="Choose Rover" />
+            android:text="@string/rover_button_text" />
         <Button
             android:id="@+id/solChooser"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
 
             android:onClick="chooseSol"
-            android:text="Select SOL" />
+            android:text="@string/sol_button_text" />
 
 
     </LinearLayout>
