@@ -1,4 +1,3 @@
 <resources>
-
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDsYMNyMC8Qg2Lb8zVNBPYViFHGfgR0YPk</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">Insert Your Google Maps API Key Here</string>
 </resources>
