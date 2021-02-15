@@ -20,15 +20,13 @@ public class MainPageAdapter extends ArrayAdapter<String> {
     int num_of_images = backgroundRes.length;
 
     TextView tv;
-    public MainPageAdapter(@NonNull Context context, ArrayList<String> arrayList) {
+    public MainPageAdapter(@NonNull Context context, ArrayList<String> arrayList, ArrayList<Integer> topic_description) {
         super(context, 0,arrayList);
         topics = arrayList;
-        descriptions = new ArrayList<Integer>();
-                    descriptions.add(R.string.apod_description);
-                    descriptions.add(R.string.rover_description);
-                    descriptions.add(R.string.iss_description);
+        descriptions = topic_description;
+    }
 
-    } @NonNull
+    @NonNull
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listViewAdapter = convertView;
 

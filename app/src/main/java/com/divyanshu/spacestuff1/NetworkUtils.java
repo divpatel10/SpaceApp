@@ -13,17 +13,18 @@ import java.net.URL;
 public class NetworkUtils {
     private static final String LOG_TAG =  NetworkUtils.class.getSimpleName();
 
-    private static final String BASE_URL = "https://api.nasa.gov/planetary/apod?";
+    private static final String APOD_URL = "https://api.nasa.gov/planetary/apod?";
     private static final String API_KEY = "api_key";
     private static final String RANDOM_ONE = "count";
     private static final String key = "KpPKYvbEQzkIwY4QwQBnMpU1Srnwp8Uel2gl976B";
     private static final String ROVER_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
     private static final String SOL_DAYS = "sol";
     private static final String PHOTOS = "/photos?";
+    private static final String ISS_URL = "https://api.wheretheiss.at/v1/satellites/25544";
+
 
 
     static String getNasaApod(String apod_date){
-
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -34,13 +35,13 @@ public class NetworkUtils {
             if(apod_date == null) {
 
 
-                builtURI  = Uri.parse(BASE_URL).buildUpon()
+                builtURI  = Uri.parse(APOD_URL).buildUpon()
                         .appendQueryParameter(API_KEY, key)
                         .appendQueryParameter(RANDOM_ONE, "1")
                         .build();
             }
             else{
-                 builtURI = Uri.parse(BASE_URL).buildUpon()
+                 builtURI = Uri.parse(APOD_URL).buildUpon()
                         .appendQueryParameter(API_KEY, key)
                         .appendQueryParameter("date", apod_date)
                         .build();
@@ -105,6 +106,7 @@ public class NetworkUtils {
 
             }
         try {
+
             Uri builtURI;
 
                     builtURI = Uri.parse(ROVER_URL+rover+PHOTOS).buildUpon()
@@ -114,7 +116,7 @@ public class NetworkUtils {
 
 
             URL requestURL = new URL(builtURI.toString());
-            Log.d("BRUH", requestURL.toString());
+            Log.d(LOG_TAG, requestURL.toString());
 
             urlConnection = (HttpURLConnection) requestURL.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -169,7 +171,7 @@ public class NetworkUtils {
         String ISSLocation = null;
 
         try {
-            Uri builtURI = Uri.parse("https://api.wheretheiss.at/v1/satellites/25544").buildUpon().build();
+            Uri builtURI = Uri.parse(ISS_URL).buildUpon().build();
 
             URL requestURL = new URL(builtURI.toString());
 

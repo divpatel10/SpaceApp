@@ -15,6 +15,8 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
 
     String[] titles = {"Nasa APOC","Mars Rovers","Live ISS tracker"};
+    ArrayList<Integer> descriptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList,titles);
-        ArrayAdapter arrayAdapter = new MainPageAdapter(MainActivity.this,arrayList);
+
+        descriptions = new ArrayList<Integer>();
+        descriptions.add(R.string.apod_description);
+        descriptions.add(R.string.rover_description);
+        descriptions.add(R.string.iss_description);
+
+        ArrayAdapter arrayAdapter = new MainPageAdapter(MainActivity.this,arrayList, descriptions);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

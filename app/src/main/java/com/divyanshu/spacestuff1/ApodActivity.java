@@ -181,7 +181,6 @@ public class ApodActivity extends AppCompatActivity {
         // If the standard image does not exist, load the HD image
             if(imageURL == null || imageURL.equals("")) {
                 Picasso.get().load(imageURL_hd).into(mImageView.get());
-                Toast.makeText(ApodActivity.this,"Bruh",Toast.LENGTH_SHORT).show();
 
             }
             else{

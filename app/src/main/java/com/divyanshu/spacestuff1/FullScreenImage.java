@@ -32,7 +32,6 @@ public class FullScreenImage extends AppCompatActivity {
                     public void onSuccess() {
                         if(progressBar != null){
                             progressBar.setVisibility(View.GONE);
-
                         }
                     }
 
