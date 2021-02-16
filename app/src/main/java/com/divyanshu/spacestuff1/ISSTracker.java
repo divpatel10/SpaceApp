@@ -42,14 +42,6 @@ public class ISSTracker extends FragmentActivity implements OnMapReadyCallback {
             }
         },0,1000);
 
-        FloatingActionButton fab = findViewById(R.id.updateISS);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new getISSLoation().execute();
-            }
-        });
 
     }
 

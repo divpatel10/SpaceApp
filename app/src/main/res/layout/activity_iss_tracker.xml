@@ -13,16 +13,4 @@
     android:layout_height="match_parent"
     tools:context=".ISSTracker" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/updateISS"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.921"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/icon_update"
-        map:layout_constraintVertical_bias="0.952" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
